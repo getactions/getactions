@@ -11,7 +11,7 @@
   Start with GitHub Actions easily.
 </h3>
 <p align="center">
-  <a href="https://getactions.dev">getactions.dev</a> helps you kickstarting your projects with pre-defined starter workflows for GitHub Actions.
+  <a href="https://getactions.dev">getactions.dev</a> helps you to kick-start your projects with pre-defined starter workflows for GitHub Actions.
 </p>
 
 <h3 align="center">
