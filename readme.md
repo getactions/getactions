@@ -8,7 +8,7 @@
 </h1>
 
 <h3 align="center">
-  Start with GitHub Actions easily.
+  Easy to use GitHub Actions Starter Workflows
 </h3>
 <p align="center">
   <a href="https://getactions.dev">getactions.dev</a> helps you to kick-start your projects with pre-defined starter workflows for GitHub Actions.
