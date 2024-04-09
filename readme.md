@@ -46,6 +46,8 @@ The best? You don't have to install any tools on your system.
 
 On [getactions.dev](https://getactions.dev), you can find a catalog of ready-to-use GitHub Action starter workflows that can be installed via a simple `cURL` execution. Would you like a taste?
 
+### Example: Installing a Vercel Preview Deployment workflow
+
 ```sh
 curl -s https://getactions.dev/deployment/vercel-preview | sh
 ```
