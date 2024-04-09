@@ -1,0 +1,47 @@
+---
+title: "WunderGraph Cosmo Schema Check"
+description: "Check if your Subgraph GraphQL schema is still compatible with the rest of your federated graph."
+readme: |
+  When operating a federated GraphQL API with [WunderGraph Cosmo](https://wundergraph.com), it is crucial to ensure that all subgraphs are compatible with the rest of the graph.
+  This workflow runs for every pull request which targets the `main` branch. It checks the schema of the subgraph against the composed schema of the federated graph to ensure compatibility. If the schema is incompatible, the pull request will be blocked until the schema is fixed.
+icon: "wundergraph"
+parameters:
+  SUBGRAPH_NAME:
+    description: "The name of the subgraph to check"
+  SUBGRAPH_SCHEMA_PATH:
+    description: "The path to the schema file of the subgraph"
+secrets:
+  COSMO_API_KEY:
+    description: "The API token for interacting with WunderGraph Cosmo. You can learn more about creating this key here: https://cosmo-docs.wundergraph.com/studio/api-keys"
+---
+name: Check Subgraph
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-subgraphs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Install Cosmo CLI
+        run: |
+          npm install -g wgc@latest
+
+      - name: Check Subgraph Schema
+        run: |
+          wgc subgraph check getactions.SUBGRAPH_NAME --schema getactions.SUBGRAPH_SCHEMA_PATH
+        env:
+          COSMO_API_KEY: ${{ secrets.COSMO_API_KEY }}

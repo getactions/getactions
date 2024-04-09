@@ -1,0 +1,39 @@
+---
+title: "Vercel Production"
+description: "This workflow deploys your application to Vercel as a production deployment"
+readme: |
+  With this workflow you can deploy your application to [Vercel](https://vercel.com) as a [production deployment](https://vercel.com/docs/deployments/environments#production). This workflow gets triggered whenever you push the `main` branch. 
+icon: "vercel"
+secrets:
+  VERCEL_TEAM_ID:
+    description: "The ID of your team on Vercel. You can find it in the settings of your team under 'General' > 'Team ID'."
+  VERCEL_PROJECT_ID:
+    description: "The ID of your project on Vercel. You can find it in the settings of your project under 'General' > 'Project ID'."
+  VERCEL_TOKEN:
+    description: "The token for interacting with the Vercel API. You can learn more on how to create the token here: https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token"
+---
+name: Vercel Production Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_TEAM_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-to-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Production Environment Information from Vercel
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

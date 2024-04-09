@@ -1,0 +1,39 @@
+---
+title: "Vercel Preview"
+description: "This workflow deploys your application to Vercel as a preview deployment"
+readme: |
+  With this workflow you can deploy your application to [Vercel](https://vercel.com) as a [preview deployment](https://vercel.com/docs/deployments/preview-deployments). This is useful when you want to test your application before merging it to your production branch. This workflow gets triggered on all branches except the `main` branch. So whenever you push to your feature branch, this workflow will make sure that a corresponding preview deployment exists afterwards.
+icon: "vercel"
+secrets:
+  VERCEL_TEAM_ID:
+    description: "The ID of your team on Vercel. You can find it in the settings of your team under 'General' > 'Team ID'."
+  VERCEL_PROJECT_ID:
+    description: "The ID of your project on Vercel. You can find it in the settings of your project under 'General' > 'Project ID'."
+  VERCEL_TOKEN:
+    description: "The token for interacting with the Vercel API. You can learn more on how to create the token here: https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token"
+---
+name: Vercel Preview Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_TEAM_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches-ignore:
+      - main
+jobs:
+  deploy-as-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Environment Information from Vercel
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
