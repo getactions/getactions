@@ -75,9 +75,13 @@ The frontmatter structure is specified and follows a schema specification so tha
 - `secrets`: The repository secret which gets used by this action. The install script summarizes these values after installing the workflow so that the user can easily add the secrets without searching around.
 - `parameters`: Values that get asked by the script during installing the workflow. Parameters are useful for asking the user about certain static values (which are not sensitive). The parameters can be referenced in the template by using the `getactions` prefix (e.g. `getactions.MY_PARAMETER`). The install script will ask the user and then substitute the value during rendering the final template.
 
+<br /><br />
+
 ## Where can I find the sources of the web application?
 
 Glad that you asked! This application is also open source: [getactions/app](https://github.com/getactions/app).
+
+<br /><br />
 
 ## 📝 License
 
