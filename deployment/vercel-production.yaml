@@ -3,7 +3,7 @@ title: "Vercel Production"
 description: "This workflow deploys your application to Vercel as a production deployment"
 readme: |
   With this workflow you can deploy your application to [Vercel](https://vercel.com) as a [production deployment](https://vercel.com/docs/deployments/environments#production). This workflow gets triggered whenever you push the `main` branch. 
-icon: "vercel"
+logo: "vercel"
 secrets:
   VERCEL_TEAM_ID:
     description: "The ID of your team on Vercel. You can find it in the settings of your team under 'General' > 'Team ID'."
