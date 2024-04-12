@@ -73,7 +73,7 @@ The frontmatter structure is specified and follows a schema specification so tha
 - `title`: Title of the workflow which gets displayed in the UI.
 - `description`: An introduction which gets displayed in the UI.
 - `readme`: The readme of the workflow which gets rendered in the detail view of the workflow in the UI.
-- `logo`: The name of the logo (which you can find under `./assets/logos` in this repository).
+- `logo`: The name of the logo (which you can find under `./.assets/logos` in this repository).
 - `secrets`: The repository secret which gets used by this action. The install script summarizes these values after installing the workflow so that the user can easily add the secrets without searching around.
 - `parameters`: Values that get asked by the script during installing the workflow. Parameters are useful for asking the user about certain static values (which are not sensitive). The parameters can be referenced in the template by using the `getactions` prefix (e.g. `getactions.MY_PARAMETER`). The install script will ask the user and then substitute the value during rendering the final template.
 
