@@ -3,9 +3,9 @@ title: "Google Cloud Run"
 description: "Deploy your stateless, containerized application on Google Cloud Run."
 ---
 
-Imagine you've just built an amazing, stateless, containerized application and you want to share it with the world. Your best bet? [Google Cloud Run](https://cloud.google.com/run). With just a `Dockerfile`, you're ready to start your journey
+Imagine you've just built an amazing, stateless, containerized application and you want to share it with the world. Your best bet? [Google Cloud Run](https://cloud.google.com/run). With just a `Dockerfile`, you're ready to start your journey.
 
-Before installing this workflow, you have to make sure that the following prerequisites are met on the Google Cloud Platform:.
+Before installing this workflow, you have to make sure that the following prerequisites are met on the Google Cloud Platform:
 
 1. Enable the following APIs: the [Artifact Registry API](https://console.cloud.google.com/apis/api/artifactregistry.googleapis.com) and the [Cloud Run Admin API](https://console.cloud.google.com/apis/api/run.googleapis.com).
 2. [Create](https://console.cloud.google.com/iam-admin/serviceaccounts/create) a new service account.
