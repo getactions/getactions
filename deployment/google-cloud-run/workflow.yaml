@@ -1,0 +1,61 @@
+---
+parameters:
+  APP_NAME:
+    description: "The name of your application"
+  GCP_REGION:
+    description: "The region where you want to deploy your application"
+  GCP_ARTIFACT_REGISTRY_REPOSITORY_ID:
+    description: "The ID of the repository in Google Artifact Registry where you want to store your Docker images"
+secrets:
+  GCP_PROJECT_ID:
+    description: "The project ID of your Google Cloud Platform project. You can find it in the project switcher."
+  GCP_CREDENTIALS:
+    description: "The service account credentials for authenticating with Google Cloud Platform. This is the keyfile JSON you downloaded when creating the service account."
+---
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: getactions.GCP_REGION
+  IMAGE_URL: getactions.GCP_REGION-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/getactions.GCP_ARTIFACT_REGISTRY_REPOSITORY_ID/getactions.APP_NAME:latest
+
+jobs:
+  build-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+    - name: Configure Docker for Google Artifact Registry 
+      run: gcloud auth configure-docker getactions.GCP_REGION-docker.pkg.dev
+
+    - name: Build container image
+      run: docker build . --tag ${{ env.IMAGE_URL }}
+
+    - name: Push container image
+      run: docker push ${{ env.IMAGE_URL }}
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy getactions.APP_NAME \
+          --image ${{ env.IMAGE_URL }} \
+          --platform managed \
+          --region getactions.GCP_REGION \
+          --allow-unauthenticated
