@@ -8,7 +8,7 @@
 </h1>
 
 <h3 align="center">
-  Easy to use GitHub Actions Starter Workflows
+  Easy to-use GitHub Actions Starter Workflows
 </h3>
 <p align="center">
   <a href="https://getactions.dev">getactions.dev</a> helps you to kick-start your projects with pre-defined starter workflows for GitHub Actions.
@@ -28,11 +28,11 @@
 
 ### Turnkey GitHub Actions workflows 
 
-Tired of wasting hours configuring your GitHub Actions workflows? We provide a catalog of starter workflows to kick-start your GitHub Actions journey.
+Are you tired of wasting hours configuring your GitHub Actions workflows? We provide a catalog of starter workflows to kick-start your GitHub Actions journey.
 
 ### Easily installable
 
-There is no need to copy and paste workflow definitions files anymore. Just run one command to install your workflow into your project. The installation process guides you through the configuration of variables within the workflow and guides you through which secrets need to be configured in your repository.
+There is no need to copy and paste workflow definition files anymore. Just run one command to install your workflow into your project. The installation process guides you through the configuration of variables within the workflow and guides you through which secrets need to be configured in your repository.
 
 The best? You don't have to install any tools on your system.
 
@@ -62,20 +62,39 @@ This enables your project to utilize [Vercel Preview Deployments](https://vercel
 
 ## 🫶 How do I contribute?
 
-In order to contribute a workflow, you have to fork this repository and create a pull request when you're ready.
+To contribute a workflow, fork this repository and create a pull request when you're ready.
 
 Let's jump into the interesting part. How to actually write a workflow?
 
-The templates are basically conventional GitHub Action workflows sprinkled with [frontmatter](https://assemble.io/docs/YAML-front-matter.html) on top.
+A workflow "package" contains three files:
 
-The frontmatter structure is specified and follows a schema specification so that the web application can use it. It consists of:
+- `workflow.yaml`: The actual workflow file (sprinkled with [frontmatter](https://assemble.io/docs/YAML-front-matter.html) on top).
+- `readme.md`: A readme which describes the workflow.
+- `logo.svg`: An icon that represents the workflow.
 
-- `title`: Title of the workflow which gets displayed in the UI.
-- `description`: An introduction which gets displayed in the UI.
-- `readme`: The readme of the workflow which gets rendered in the detail view of the workflow in the UI.
-- `logo`: The name of the logo (which you can find under `./.assets/logos` in this repository).
-- `secrets`: The repository secret which gets used by this action. The install script summarizes these values after installing the workflow so that the user can easily add the secrets without searching around.
-- `parameters`: Values that get asked by the script during installing the workflow. Parameters are useful for asking the user about certain static values (which are not sensitive). The parameters can be referenced in the template by using the `getactions` prefix (e.g. `getactions.MY_PARAMETER`). The install script will ask the user and then substitute the value during rendering the final template.
+This package needs to be categorized under one of the main categories. The name of the category + the name of the workflow package directory represent the ID of the workflow.
+
+### The `workflow.yaml`
+
+The actual GitHub Actions workflow. You can specify the following attributes in the frontmatter part of the workflow file:
+
+- `parameters`: An object with parameters. The user will asked for the actual values when installing the script via `curl -s https://getactions.dev/<id> | bash`. You can define the places where the actual value will be placed via `getactions.<NAME_OF_PARAM>`.
+- `secrets`: An object with secrets the user has to add to the respective GitHub repository. The installation script will print a table with all the secrets after installing the workflow in the repository. This will help the user easily configure the secrets without switching contexts.
+
+Check the [WunderGraph Cosmo Schema Check](/ci/wundergraph-cosmo-schema-check) workflow to see these two attributes in action.
+
+### The `readme.md`
+
+Describes your workflow. The contents of this file gets displayed on [getactions.dev](https://getactions.dev). The frontmatter attributes are:
+
+- `title`: The title of your workflow.
+- `description`: A short description of your workflow.
+
+The actual contents below the frontmatter is for describing your workflow in a detailed way.
+
+### The `logo.svg`
+
+The logo gets displayed on [getactions.dev](https://getactions.dev) as well. Please make sure to remove `width` and `height` attributes from the root element of the SVG.
 
 <br /><br />
 
