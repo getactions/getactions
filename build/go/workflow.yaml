@@ -25,7 +25,8 @@ jobs:
           - goarch: "386"
             goos: darwin
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
     - name: "Build and Release"
       uses: wangyoucao577/go-release-action@v1
