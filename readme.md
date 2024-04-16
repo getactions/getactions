@@ -20,9 +20,7 @@
 
 <img alt="screenshot of the getactions.dev app" src="https://res.cloudinary.com/drfaodoe5/image/upload/v1712677753/getactions.dev.png" />
 
-<br>
-
-<br /><br />
+<br /><br /><br />
 
 ## ✨ Features
 
