@@ -70,7 +70,7 @@ A workflow "package" contains three files:
 
 - `workflow.yaml`: The actual workflow file (sprinkled with [frontmatter](https://assemble.io/docs/YAML-front-matter.html) on top).
 - `readme.md`: A readme which describes the workflow.
-- `logo.svg`: An icon that represents the workflow.
+- `logo.svg` (optional): An icon that represents the workflow. When not defined the GitHub Actions logo will be used.
 
 This package needs to be categorized under one of the main categories. The name of the category + the name of the workflow package directory represent the ID of the workflow.
 
