@@ -24,7 +24,7 @@
 
 ## ✨ Features
 
-### Turnkey GitHub Actions workflows 
+### Turnkey GitHub Actions workflows
 
 Are you tired of wasting hours configuring your GitHub Actions workflows? We provide a catalog of starter workflows to kick-start your GitHub Actions journey.
 
