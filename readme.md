@@ -18,7 +18,7 @@
  🤖 🚀
 </h3>
 
-<img alt="screenshot of the getactions.dev app" src="https://res.cloudinary.com/drfaodoe5/image/upload/v1712677753/getactions.dev.png" />
+<img alt="screenshot of the getactions.dev app" src="https://asset.cloudinary.com/drfaodoe5/f13fc64d417bb91811d913507bd48c5d" />
 
 <br /><br /><br />
 
