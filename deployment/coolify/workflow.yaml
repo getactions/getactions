@@ -1,0 +1,43 @@
+---
+secrets:
+  COOLIFY_WEBHOOK:
+    description: "The webhook URL for your Coolify instance. You can find it via: Your Resource -> Webhooks -> Deploy Webhook."
+  COOLIFY_TOKEN:
+    description: "The API Token for interacting with your Coolify instance (docs: https://coolify.io/docs/api-reference/authorization)"
+---
+name: "Deploy to Coolify"
+on:
+  push:
+    branches: ["main"]
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN  }}
+
+      - name: Build image and push to registry
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Deploy to Coolify
+        run: | 
+          curl --fail-with-body --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
