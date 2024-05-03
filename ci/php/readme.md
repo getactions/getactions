@@ -1,5 +1,5 @@
 ---
-title: "Run Test Suite"
+title: "PHP: Run Test Suite"
 description: "Installs dependencies and runs tests on the main branch using Composer."
 ---
 
