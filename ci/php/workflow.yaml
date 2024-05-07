@@ -20,7 +20,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Validate manifest files (composer.json and composer.lock=
+    - name: Validate manifest files (composer.json and composer.lock)
       run: composer validate --strict
 
     - name: Caching packages
