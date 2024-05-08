@@ -1,6 +1,6 @@
 ---
 title: "Node.js: Run Test Suite"
-description: "Installs dependencies, optionally build the project and runs tests on the main branch using."
+description: "Installs dependencies, optionally build the project and runs tests on the main branch."
 new: true
 ---
 
