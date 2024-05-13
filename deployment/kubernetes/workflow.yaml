@@ -1,7 +1,7 @@
 ---
 parameters:
   NAMESPACE:
-    description: "The Kubernetes namespace into which you want to deploy (e.g. `prod`)."
+    description: "The Kubernetes namespace into which you want to deploy (e.g. 'prod')."
 secrets:
   KUBERNETES_URL:
     description: "The URL of the Kubernetes cluster API server. This needs to be reachable from the GitHub Actions runner."
