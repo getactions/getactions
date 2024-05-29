@@ -19,16 +19,20 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.x
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
 
-      - name: Ensure consistent formatting
-        run: deno fmt --check
+    - name: Ensure consistent formatting
+      run: deno fmt --check
 
-      - name: Run Linter
-        run: deno lint
+    - name: Run Linter
+      run: deno lint
 
-      - name: Run Tests
-        run: deno test -A
+    - name: Run Tests
+      run: deno test -A
+
+    - name: Run Benchmark
+      run: deno bench -A
+
